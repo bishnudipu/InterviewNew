@@ -1,0 +1,75 @@
+*{
+  margin: 0;
+  padding: 0;
+}
+
+
+.interview-page {
+  display: flex;
+  flex-direction: column; /* Change to column layout */
+  height: 100vh;
+  margin-top: 20px; /* Add margin to the top */
+  margin-bottom: 20px; /* Add margin to the bottom */
+  background-image: url("../images/image1.jpg");
+  background-size: cover;
+  filter: blur(12px);
+   
+}
+
+
+.interview-page2 {
+  display: flex;
+  flex-direction: column; /* Change to column layout */
+  height: 100vh;
+  margin-top: 20px; /* Add margin to the top */
+  margin-bottom: 20px; /* Add margin to the bottom */
+  background-image: url("../images/image1.jpg");
+  background-size: cover;
+
+}
+
+
+
+.camera-container {
+  flex: 1; /* Take the full available height */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.webcam-video {
+  position: absolute;
+  border: 2px solid white;
+  top: 10%;
+  left: 4.5%;
+  width: 90%;
+  height: 80%;
+  object-fit: cover;
+}
+
+.image-container {
+  position: absolute;
+  bottom: 10px; /* Adjust the bottom margin */
+  right: 10px; /* Adjust the right margin */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.interviewee-image {
+  width: 250px; /* Adjust the width as needed */
+  height: 200px; /* Adjust the height as needed */
+  object-fit: cover;
+  border-radius: 50%; /* Make it round */
+}
+
+.audio-indicator {
+  position: absolute;
+  width: 16%;
+  height: 5%;
+  top: 50%;
+  left: 43%;
+  background-color: #2d902d; /* Set the color you want for the indicator */
+  border-radius:  20px
+  }

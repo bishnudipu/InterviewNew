@@ -1,4 +1,51 @@
+import React from "react";
+import axios from "axios";
+import { useState } from "react";
+import { useHistory } from "react-router-dom";
 const Login = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const history = useHistory();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const body = {
+      username: email,
+      password: password,
+    };
+
+    try {
+      const response = await axios.post(
+        "http://3.110.131.163:5000/login",
+        body
+      );
+      console.log(response);
+
+      if (response.status === 200) {
+        const jwtToken = response.data.access_token;
+        console.log(jwtToken);
+        // Use a more secure method to store tokens, like HttpOnly cookies.
+        sessionStorage.setItem("access-token", jwtToken);
+        console.log("check1");
+        history.push("/userinfo");
+        console.log("check2");
+      } else {
+        console.error("Authentication failed");
+        // Display a general error message to the user
+      }
+
+      // You can do further actions like redirecting the user or showing a success message.
+    } catch (error) {
+      console.error(
+        "Error during authentication:",
+        error.response?.data || error.message
+      );
+      // Handle error cases like displaying error messages to the user.
+    }
+  };
+
   return (
     <section className="bg-gray-50 dark:bg-gray-900">
       <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
@@ -16,6 +63,8 @@ const Login = () => {
                   type="email"
                   name="email"
                   id="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="name@company.com"
                   required=""
@@ -29,6 +78,8 @@ const Login = () => {
                   type="password"
                   name="password"
                   id="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                   placeholder="••••••••"
                   className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   required=""
@@ -60,6 +111,7 @@ const Login = () => {
               </div>
               <button
                 type="submit"
+                onClick={handleSubmit}
                 className="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
               >
                 Sign in

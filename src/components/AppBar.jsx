@@ -1,6 +1,6 @@
 import * as React from "react";
 import PropTypes from "prop-types";
-
+import { useHistory } from "react-router-dom";
 import Box from "@mui/material/Box";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
@@ -21,7 +21,7 @@ const logoStyle = {
 
 function AppAppBar({ mode, toggleColorMode }) {
   const [open, setOpen] = React.useState(false);
-
+  const history = useHistory();
   const toggleDrawer = (newOpen) => () => {
     setOpen(newOpen);
   };
@@ -146,8 +146,10 @@ function AppAppBar({ mode, toggleColorMode }) {
                 variant="text"
                 size="small"
                 component="a"
-                href="/material-ui/getting-started/templates/sign-in/"
                 target="_blank"
+                onClick={() => {
+                  history.push("/login");
+                }}
               >
                 Sign in
               </Button>
@@ -156,8 +158,10 @@ function AppAppBar({ mode, toggleColorMode }) {
                 variant="contained"
                 size="small"
                 component="a"
-                href="/material-ui/getting-started/templates/sign-up/"
                 target="_blank"
+                onClick={() => {
+                  history.push("/signup");
+                }}
               >
                 Sign up
               </Button>
@@ -215,10 +219,13 @@ function AppAppBar({ mode, toggleColorMode }) {
                       color="primary"
                       variant="contained"
                       component="a"
-                      href="/material-ui/getting-started/templates/sign-up/"
                       target="_blank"
                       sx={{ width: "100%" }}
+                      onClick={() => {
+                        history.push("/signup");
+                      }}
                     >
+                      {" "}
                       Sign up
                     </Button>
                   </MenuItem>
@@ -227,10 +234,13 @@ function AppAppBar({ mode, toggleColorMode }) {
                       color="primary"
                       variant="outlined"
                       component="a"
-                      href="/material-ui/getting-started/templates/sign-in/"
                       target="_blank"
                       sx={{ width: "100%" }}
+                      onClick={() => {
+                        history.push("/login");
+                      }}
                     >
+                      {" "}
                       Sign in
                     </Button>
                   </MenuItem>

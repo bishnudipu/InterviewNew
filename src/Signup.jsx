@@ -1,6 +1,38 @@
-import React from "react";
+/* eslint-disable */
 
+import React from "react";
+import axios from "axios";
+import { useState } from "react";
 const SignUp = () => {
+  const [name, setName] = useState("");
+  const [userName, setUserName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const body = {
+      name: name,
+      email: email,
+      phone: phone,
+      username: userName,
+      password: password,
+    };
+
+    try {
+      const response = await axios.post(
+        "http://3.110.131.163:5000/create_account",
+        body
+      );
+      console.log(response, "responseeee");
+    } catch (error) {
+      //   console.error("Signup failed:", error);
+      // Handle error cases like displaying error messages to the user.
+    }
+  };
+
   return (
     <div>
       <section className="bg-gray-50 dark:bg-gray-900">
@@ -18,6 +50,8 @@ const SignUp = () => {
                   <input
                     type="text"
                     name="name"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
                     id="name"
                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Name"
@@ -32,6 +66,8 @@ const SignUp = () => {
                     type="text"
                     name="userName"
                     id="userName"
+                    value={userName}
+                    onChange={(e) => setUserName(e.target.value)}
                     placeholder="User Name"
                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     required=""
@@ -45,6 +81,8 @@ const SignUp = () => {
                     type="email"
                     name="email"
                     id="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                     placeholder="a@a.com"
                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     required=""
@@ -58,6 +96,8 @@ const SignUp = () => {
                     type="number"
                     name="phone"
                     id="phone"
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
                     placeholder="+91 0000000000"
                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     required=""
@@ -71,6 +111,8 @@ const SignUp = () => {
                     type="password"
                     name="password"
                     id="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
                     placeholder="Password"
                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     required=""
@@ -113,6 +155,7 @@ const SignUp = () => {
                 </div> */}
                 <button
                   type="submit"
+                  onClick={handleSubmit}
                   className="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
                 >
                   Create an account
